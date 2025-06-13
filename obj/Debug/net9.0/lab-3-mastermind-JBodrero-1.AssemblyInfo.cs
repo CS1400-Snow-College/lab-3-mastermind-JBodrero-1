@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lab-3-mastermind-JBodrero-1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d05bdb99c70542cbb446d96ecdb4610c324c7841")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f057a23d10aab2d0299dd5fa97ed36099d40f30f")]
 [assembly: System.Reflection.AssemblyProductAttribute("lab-3-mastermind-JBodrero-1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lab-3-mastermind-JBodrero-1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

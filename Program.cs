@@ -6,9 +6,9 @@
 
 using System.Globalization;
 
-int secretLength = 4;
-int inputLength = 0;
-int numberLetters = 7;
+int secretLength = 4;   // Length of secret code
+int inputLength = 0;    // Use to verify input is correct length
+int numberLetters = 7;  
 int guessNumber = 1;      //  Count number of guesses
 int numCorrect = 0; // Number of letters in correct location
 int numContain = 0;
@@ -22,7 +22,7 @@ Console.Clear();
 Console.WriteLine("Greetings!  Let's play a logic game called Mastermind.");
 Console.WriteLine($"I will create a secret sequence of {secretLength} letters from 'a' to 'g' and no letter appears more than once.");
 Console.WriteLine("Your job is to guess my secret sequence in as few guesses as possible.");
-Console.WriteLine("At each turn, I'll tell you how many letters are in the correct location (but not which ones) and \nhow many are in the sequence but in the wrong location.");
+Console.WriteLine("At each turn, I'll tell you how many letters are in the correct location and \nhow many are in the sequence but in the wrong location (but not which ones).");
 Console.WriteLine("Are you ready to play?  Press any key to continue.\n");
 Console.ReadKey(true);
 
@@ -30,8 +30,8 @@ Console.ReadKey(true);
 do
 {
     numCorrect = 0;
-    //numContain = 0;
     numWrong = 0;
+    // Get input and check for correcdt length.
     Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.\n  ");
     do
     {
@@ -39,7 +39,7 @@ do
         inputGuess = Console.ReadLine().ToLower();
         if (inputGuess.Length != secret.Length)
         {
-            Console.WriteLine("Oops.  That's not the right number of letters to guess.  Try again.");
+            Console.Write($"Oops.  That's not the right number of letters to guess.  Try again with {secretLength} letters. \n  ");
         }
         else
         {
@@ -48,15 +48,15 @@ do
     }
     while (inputLength != secret.Length);
 
+    currentGuess = inputGuess;  // If correct length, set currentGuess to inputGuess
 
-    currentGuess = inputGuess;
-    for (int i = 0; i < secretLength; i++)
+    for (int i = 0; i < secretLength; i++)  //Check each position to see if letter is correct
     {
         if (currentGuess[i] == secret[i])
         { numCorrect++; }
         else
         {
-            for (int j = 0; j < secretLength; j++)
+            for (int j = 0; j < secretLength; j++)  //If not correct in posn, check other posns.
             {
                 if (secret[i] == currentGuess[j])
                 {
@@ -66,7 +66,8 @@ do
         }
 
     }
-    if (numCorrect == secretLength)
+    
+    if (numCorrect == secretLength)  // Determine if game ends.  If not, move to next guess.
         {
             Console.WriteLine($"Congrats!  You found my secret code of {secret} in {guessNumber} guesses.");
         }
@@ -75,7 +76,7 @@ do
             Console.WriteLine($"\tYou have {numCorrect} letter(s) in the correct location.");
             Console.WriteLine($"\tYou have {numWrong} letter(s) in the wrong location.\n");
         }
-    guessNumber++;
+    guessNumber++;  // Keep track of number of guesses.
 }
 while (currentGuess != secret);
 
