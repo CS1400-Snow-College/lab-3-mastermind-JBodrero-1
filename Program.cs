@@ -7,6 +7,7 @@
 using System.Globalization;
 
 int secretLength = 4;
+int inputLength = 0;
 int numberLetters = 7;
 int guessNumber = 1;      //  Count number of guesses
 int numCorrect = 0; // Number of letters in correct location
@@ -29,10 +30,26 @@ Console.ReadKey(true);
 do
 {
     numCorrect = 0;
-    numContain = 0;
+    //numContain = 0;
     numWrong = 0;
     Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.\n  ");
-    currentGuess = Console.ReadLine().ToLower();
+    do
+    {
+        inputLength = 0;
+        inputGuess = Console.ReadLine().ToLower();
+        if (inputGuess.Length != secret.Length)
+        {
+            Console.WriteLine("Oops.  That's not the right number of letters to guess.  Try again.");
+        }
+        else
+        {
+            inputLength = secret.Length;
+        }
+    }
+    while (inputLength != secret.Length);
+
+
+    currentGuess = inputGuess;
     for (int i = 0; i < secretLength; i++)
     {
         if (currentGuess[i] == secret[i])
@@ -47,14 +64,7 @@ do
                 }
             }
         }
-        /*
-                for (int i = 0; i < secretLength; i++)
-                {
-                    if (currentGuess.Contains(secret[i]))
-                    { numContain++;
-                    }
-                }
-        */
+
     }
     if (numCorrect == secretLength)
         {
