@@ -3,12 +3,12 @@
 //  Lab 4 Mastermind
 
 //Console.Write("Hola Mundo!");
-using System.ComponentModel.DataAnnotations;
 
 int secretLength = 4;
 int numberLetters = 7;
 int guessNumber = 1;      //  Count number of guesses
 int numCorrect = 0; // Number of letters in correct location
+int numContain = 0;
 int numWrong = 0;   // Number of letters in seq but in wrong location
 string secret = "egad";
 string inputGuess = "zzzz";
@@ -26,10 +26,17 @@ Console.ReadKey(true);
 
 do
 {
-    Console.WriteLine($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.");
+    numCorrect = 0;
+    numContain = 0;
+    Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.\n  ");
     currentGuess = Console.ReadLine().ToLower();
+    for (int i = 0; i < secretLength; i++)
+    {
+        if (currentGuess[i] == secret[i])
+        { numCorrect++; }
+    }
 
-
+    Console.WriteLine($"You have {numCorrect} letter(s) in the correct location.");
     guessNumber++;
 }
 while (currentGuess != secret);
