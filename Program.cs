@@ -4,6 +4,8 @@
 
 //Console.Write("Hola Mundo!");
 
+using System.Globalization;
+
 int secretLength = 4;
 int numberLetters = 7;
 int guessNumber = 1;      //  Count number of guesses
@@ -28,27 +30,41 @@ do
 {
     numCorrect = 0;
     numContain = 0;
+    numWrong = 0;
     Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.\n  ");
     currentGuess = Console.ReadLine().ToLower();
     for (int i = 0; i < secretLength; i++)
     {
         if (currentGuess[i] == secret[i])
         { numCorrect++; }
-    }
-    for (int i = 0; i < secretLength; i++)
-    {
-        if (currentGuess.Contains(secret[i]))
-        { numContain++; }
+        else
+        {
+            for (int j = 0; j < secretLength; j++)
+            {
+                if (secret[i] == currentGuess[j])
+                {
+                    numWrong++;
+                }
+            }
+        }
+        /*
+                for (int i = 0; i < secretLength; i++)
+                {
+                    if (currentGuess.Contains(secret[i]))
+                    { numContain++;
+                    }
+                }
+        */
     }
     if (numCorrect == secretLength)
-    {
-        Console.WriteLine($"Congrats!  You found my secret code of {secret} in {guessNumber} guesses.");
-    }
-    else
-    {
-        Console.WriteLine($"\tYou have {numCorrect} letter(s) in the correct location.");
-        Console.WriteLine($"\tYou have {numContain - numCorrect} letter(s) in the wrong location.\n");
-    }
+        {
+            Console.WriteLine($"Congrats!  You found my secret code of {secret} in {guessNumber} guesses.");
+        }
+        else
+        {
+            Console.WriteLine($"\tYou have {numCorrect} letter(s) in the correct location.");
+            Console.WriteLine($"\tYou have {numWrong} letter(s) in the wrong location.\n");
+        }
     guessNumber++;
 }
 while (currentGuess != secret);
