@@ -8,17 +8,39 @@ using System.Globalization;
 
 int secretLength = 4;   // Length of secret code
 int inputLength = 0;    // Use to verify input is correct length
-int numberLetters = 7;  
+int numberLetters = 7;
+int topNumber = 97 + numberLetters;
 int guessNumber = 1;      //  Count number of guesses
 int numCorrect = 0; // Number of letters in correct location
-int numContain = 0;
 int numWrong = 0;   // Number of letters in seq but in wrong location
 string secret = "egad";
 string inputGuess = "zzzz";
 string currentGuess = "xxxx";
+char[] hidden = new char[secretLength];
+int randy;
+char tempChar = 'z';
+string tempString = "";
+
+Random rand = new Random();
+for (int i = 0; i < secretLength; i++)
+{
+    do
+    {
+        randy = rand.Next(97, topNumber);
+        Console.WriteLine($"{randy}");  // Debugging
+        tempChar = Convert.ToChar(randy);
+        if (!tempString.Contains(tempChar))
+        { tempString = string.Concat(tempString, tempChar); }
+    } while (!tempString.Contains(tempChar));
+    
+}
+Console.Clear();
+//Console.WriteLine(hidden);  // Debugging.
+secret = string.Concat(hidden);
+//secret = Convert.ToString(hidden);  //  This didn't work.
+Console.WriteLine($"secret = {secret}");
 
 // Greeting and game instructions.
-Console.Clear();
 Console.WriteLine("Greetings!  Let's play a logic game called Mastermind.");
 Console.WriteLine($"I will create a secret sequence of {secretLength} letters from 'a' to 'g' and no letter appears more than once.");
 Console.WriteLine("Your job is to guess my secret sequence in as few guesses as possible.");
@@ -32,14 +54,14 @@ do
     numCorrect = 0;
     numWrong = 0;
     // Get input and check for correcdt length.
-    Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secretLength} lowercase letters with no repeats.\n  ");
+    Console.Write($"Guess #{guessNumber}: Please guess a sequence of {secret.Length} lowercase letters with no repeats.\n  ");
     do
     {
         inputLength = 0;
         inputGuess = Console.ReadLine().ToLower();
         if (inputGuess.Length != secret.Length)
         {
-            Console.Write($"Oops.  That's not the right number of letters to guess.  Try again with {secretLength} letters. \n  ");
+            Console.Write($"Oops.  That's not the right number of letters to guess.  Try again with {secret.Length} letters. \n  ");
         }
         else
         {
