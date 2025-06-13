@@ -35,9 +35,22 @@ do
         if (currentGuess[i] == secret[i])
         { numCorrect++; }
     }
-
-    Console.WriteLine($"You have {numCorrect} letter(s) in the correct location.");
+    for (int i = 0; i < secretLength; i++)
+    {
+        if (currentGuess.Contains(secret[i]))
+        { numContain++; }
+    }
+    if (numCorrect == secretLength)
+    {
+        Console.WriteLine($"Congrats!  You found my secret code of {secret} in {guessNumber} guesses.");
+    }
+    else
+    {
+        Console.WriteLine($"\tYou have {numCorrect} letter(s) in the correct location.");
+        Console.WriteLine($"\tYou have {numContain - numCorrect} letter(s) in the wrong location.\n");
+    }
     guessNumber++;
 }
 while (currentGuess != secret);
+
 
