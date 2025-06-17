@@ -75,7 +75,7 @@ for (int i = 0; i < secretLength; i++)
     } while (tempString.Length < i + 1);            // else pick a new random number.
 
 }
-secret = tempString;        //  Set secret to the randomly generated string.
+// secret = tempString;        //  Set secret to the randomly generated string.
 Console.WriteLine($"{secret}");  // Used for debugging code.
 do
 {
